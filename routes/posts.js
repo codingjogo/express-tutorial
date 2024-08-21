@@ -62,4 +62,16 @@ router.put('/:id', (req, res) => {
     res.status(200).send(post);
 })
 
+router.delete('/:id', (req, res) => {
+    // Remember this could be an API in your Database
+    // This is just a reresentation on how it works
+    const id = parseInt(req.params.id);
+    if (!id) {
+        return res.status(404).send({message: "ID Not Found!"});
+    }
+
+    posts = posts.filter(p => p.id !== id);
+    res.status(200).send(posts);
+})
+
 export default router
