@@ -16,7 +16,8 @@ app.get('/api/posts', (req, res) => {
 
     // try this out with ?limit=2 and see changes from your posts
     if (!isNaN(limit) && limit > 0) {
-        return res.json(posts.slice(0, limit));
+        // we can chain status code and json methods
+        return res.status(200).json(posts.slice(0, limit));
     }
 
     res.json(posts);
@@ -28,12 +29,10 @@ app.get('/api/posts/:id', (req, res) => {
     const post = posts.find(p => p.id === id);
 
     if (!post) {
-        res.status = 404;
-        return res.json({message: "Post not Found!"})
+        return res.status(404).json({message: "Post not Found!"})
     } 
 
-    res.status = 200;
-    res.json(post);
+    res.status(200).json(post);
 })
 
 app.listen(port, () => {
