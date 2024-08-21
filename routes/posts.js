@@ -48,4 +48,18 @@ router.post('/', (req, res) => {
     res.status(201).json(posts);
 });
 
+router.put('/:id', (req, res) => {
+    // Remember this could be an API in your Database
+    // This is just a reresentation on how it works
+    const id = parseInt(req.params.id);
+    if (!id) {
+        return res.status(404).send({message: "ID Not Found!"});
+    }
+
+    const post = posts.find(p => p.id === id);
+
+    post.title = req.body.title;
+    res.status(200).send(post);
+})
+
 export default router
