@@ -12,6 +12,13 @@ let posts = [
 
 // Get all posts
 app.get('/api/posts', (req, res) => {
+    const limit = parseInt(req.query.limit);
+
+    // try this out with ?limit=2 and see changes from your posts
+    if (!isNaN(limit) && limit > 0) {
+        return res.json(posts.slice(0, limit));
+    }
+
     res.json(posts);
 })
 
